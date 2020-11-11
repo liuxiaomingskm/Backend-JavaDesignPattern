@@ -13,21 +13,28 @@ import java.util.Arrays;
 
 // Cloneable is a marker interface
 class Address implements Cloneable {
-    public String streetName;
-    public int houseNumber;
+    public String streetAddress, city, country;
 
-    public Address(String streetName, int houseNumber)
+    public Address(String streetAddress, String city, String country)
     {
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+    }
+
+    //比较新奇的写法 以地址作为参数的构造函数 this指代构造函数
+    public Address(Address other)
+    {
+        this(other.streetAddress, other.city, other.country);
     }
 
     @Override
     public String toString()
     {
         return "Address{" +
-                "streetName='" + streetName +'\'' +
-                ", houseNumber=" + houseNumber +
+                "streetName='" + streetAddress +'\'' +
+                ", city=" + city + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 
@@ -35,7 +42,7 @@ class Address implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Address(streetName, houseNumber);
+        return new Address(streetAddress, city,country);
     }
 }
 
@@ -76,19 +83,26 @@ class Person implements Cloneable
 class CloneableDemo {
     public static void main(String[] args) throws CloneNotSupportedException{
         Person john =  new Person(new String[]{"John", "Smith"},
-                new Address("London Road", 123));
+                new Address("London Road", "Overland Park", "US"));
 
-        // shallow copy, not good:
-        // Person jane = john;
 
         //jane is the girl next door
         Person jane = (Person) john.clone();
         jane.names[0] = "Jane"; // clone is (originally) shallow copy
-        jane.address.houseNumber = 124; // oops, also changed john
+        jane.address.country = "UK";
 
         System.out.println(john);
         System.out.println(jane);
 
         // list.clone is deep copy or shallow copy?
+        /**
+         * Summary:
+         *
+         * Based on the GeeksforGeeks, clone() and System.arraycopy() is deepcopy for arrayList
+         *
+         * Interface Cloneable is a marker interface, it doesn't contain anything.
+         *
+         * The default clone() is shallow copy, so we have to override it.
+         */
     }
 }
