@@ -74,4 +74,10 @@ class EnumBasedSingletonDemo
         System.out.println(singleton2.getValue());
     }
 }
+/**
+ * Summary:
+ * Enum有很多好处，默认是private构造函数，天生就是serializable，但它的serializable和一般序列化不同，enum中的field无法序列化，设定某个field的值, 然后序列化
+ * 再反序列化，该field值不是之前设定的值。enum天生保持单例，并且没有反序列化后field不一致的问题，即反序列化后，field还是最新的值，永远保持单例。所以除了无法继承，无法
+ * 保存fields，enum是理想的singleton。
+ */
 
