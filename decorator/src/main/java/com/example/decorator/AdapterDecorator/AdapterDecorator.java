@@ -260,3 +260,9 @@ class AdapterDecorator {
         System.out.println(msb.concat("and this too"));
     }
 }
+
+/**
+ * Summary：
+ * This class has both the Adapter and Decorator functions. It can append String as many as you want while adapt the function
+ * from String.
+ */
