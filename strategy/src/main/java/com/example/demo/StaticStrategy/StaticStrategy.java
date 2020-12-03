@@ -48,7 +48,7 @@ class TextProcessor<LS extends ListStrategy>
 {
     private StringBuilder sb = new StringBuilder();
     // cannot do this
-    // private LS listStrategy = new LS();
+    // private LS listStrategy = new LS(); // because of Java type erasion, we cannot create instance via new keyword.
     private LS listStrategy;
 
     public TextProcessor(Supplier<? extends LS> ctor)
@@ -95,4 +95,10 @@ class TextProcessor<LS extends ListStrategy>
  * you have three parts, start, addItems, end and subsequently what you can do is you can have different strategies that plug
  * into a particular object and the base class of the strategy is going to be used regardless so we can replace the interface with
  * any implementation we want.
+ *
+ *Steps:
+ * Define an algorithm at a high level
+ * Define the interface you expect each strategy to follow
+ * Provide for either dynamic or static composition of strategy in the
+ * overall algorithm
  */
