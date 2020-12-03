@@ -101,3 +101,8 @@ public class AcyclicVisitor {
         System.out.println(ep.toString());
     }
 }
+
+/**
+ * 大致思路是每个特定expression都有一个特定的visitor，如果不是特定visitor就不执行 visitor.visit(this)，所以先看一下expression里面有多少个
+ * 实现类，然后Visitor继承相应实现类对应的visitor接口，override所有visit方法 就能遍历这个expression中所有的expression的子类了
+ */
